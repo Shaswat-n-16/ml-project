@@ -96,10 +96,11 @@ class ModelTrainer:
                 list(model_report.values()).index(best_model_score)
             ]
             best_model = models[best_model_name]
+            logging.info(f"Best model is {best_model_name} with the acurracy of {best_model_score*100} %")
 
             if best_model_score<0.6:
                 raise CustomException("No best model found")
-            logging.info(f"Best found model on both training and testing dataset")
+
 
             save_object(
                 file_path=self.model_trainer_config.trained_model_file_path,
@@ -111,9 +112,6 @@ class ModelTrainer:
             r2_square = r2_score(y_test, predicted)
             return r2_square
             
-
-
-
             
         except Exception as e:
             raise CustomException(e,sys)
